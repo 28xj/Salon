@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello Tryit Salon - 同意書</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>同意書簽署</h1>
+        <select id="form-type">
+            <option value="接髮">接髮同意書</option>
+            <option value="漂髮">漂髮同意書</option>
+            <option value="燙髮">燙髮同意書</option>
+        </select>
+        <div id="content" class="content-box">請選擇同意書類型</div>
+        <canvas id="signature-pad"></canvas>
+        <div class="btn-group">
+            <button onclick="clearPad()">清除</button>
+            <button onclick="saveSignature()">儲存簽名</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
