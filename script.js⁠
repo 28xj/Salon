@@ -1,0 +1,36 @@
+const canvas = document.getElementById('signature-pad');
+const ctx = canvas.getContext('2d');
+let drawing = false;
+
+// 簽名邏輯
+canvas.addEventListener('mousedown', () => drawing = true);
+canvas.addEventListener('mouseup', () => drawing = false);
+canvas.addEventListener('mousemove', draw);
+canvas.addEventListener('touchstart', () => drawing = true);
+canvas.addEventListener('touchend', () => drawing = false);
+canvas.addEventListener('touchmove', draw);
+
+function draw(e) {
+    if (!drawing) return;
+    ctx.lineWidth = 2;
+    ctx.lineCap = 'round';
+    ctx.strokeStyle = '#4a4a4a';
+    const rect = canvas.getBoundingClientRect();
+    const x = (e.clientX || e.touches[0].clientX) - rect.left;
+    const y = (e.clientY || e.touches[0].clientY) - rect.top;
+    ctx.lineTo(x, y);
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+}
+
+function clearPad() { ctx.clearRect(0, 0, canvas.width, canvas.height); ctx.beginPath(); }
+
+function saveSignature() {
+    const type = document.getElementById('form-type').value;
+    const date = new Date().toISOString().slice(0, 10);
+    const link = document.createElement('a');
+    link.download = `${type}_${date}_${Date.now()}.png`;
+    link.href = canvas.toDataURL();
+    link.click();
+}
